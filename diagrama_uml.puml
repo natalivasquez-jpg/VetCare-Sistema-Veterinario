@@ -1,0 +1,90 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class HistorialClinico {
+  -registros: list
+  +agregar_registro(descripcion)
+  +consultar_registros(): list
+}
+
+class Propietario {
+  -nombre: str
+  -telefono: str
+  -mascotas: list
+  +registrar_mascota(mascota)
+  +listar_mascotas(): list
+}
+
+class Mascota {
+  -nombre: str
+  -especie: str
+  -edad: int
+  -propietario: Propietario
+  -historial: HistorialClinico
+  +agregar_atencion(descripcion)
+  +consultar_historial(): list
+}
+
+class Veterinario {
+  -nombre: str
+  -especialidad: str
+}
+
+abstract class ServicioVeterinario {
+  #nombre: str
+  #duracion_minutos: int
+  {abstract} +calcular_costo()
+  {abstract} +generar_recomendacion()
+}
+
+class ConsultaGeneral {
+  -tarifa_base: float
+  +calcular_costo()
+  +generar_recomendacion()
+}
+
+class Vacunacion {
+  -cantidad_dosis: int
+  -costo_por_dosis: float
+  +calcular_costo()
+  +generar_recomendacion()
+}
+
+class Desparasitacion {
+  -peso_kg: float
+  -costo_por_kg: float
+  +calcular_costo()
+  +generar_recomendacion()
+}
+
+class Cita {
+  -mascota: Mascota
+  -veterinario: Veterinario
+  -servicio: ServicioVeterinario
+  -fecha_hora: datetime
+  -estado: str
+  +confirmar()
+  +completar()
+  +resumen()
+}
+
+class ClinicaVeterinaria {
+  -nombre: str
+  -mascotas: list
+  -citas: list
+  +registrar_mascota(mascota)
+  +programar_cita(...)
+  +listar_citas()
+}
+
+ServicioVeterinario <|-- ConsultaGeneral
+ServicioVeterinario <|-- Vacunacion
+ServicioVeterinario <|-- Desparasitacion
+Mascota *-- HistorialClinico : composición
+Propietario "1" o-- "0..*" Mascota : registra
+Cita --> Mascota
+Cita --> Veterinario
+Cita --> ServicioVeterinario
+ClinicaVeterinaria o-- Mascota
+ClinicaVeterinaria o-- Cita
+@enduml
