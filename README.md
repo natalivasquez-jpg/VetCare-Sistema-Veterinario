@@ -15,14 +15,14 @@ VetCare permite registrar mascotas y propietarios, administrar veterinarios, pro
 3. Ejecute en la terminal:
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 ## 4. Estructura
 - `main.py`: programa principal y demostración de casos normales y excepcionales.
 - `models.py`: entidades, herencia, composición, polimorfismo y excepciones.
 - `diagrama_uml.puml`: diagrama UML en PlantUML.
-- `Documento_Decisiones_Diseno.docx`: justificación técnica del diseño.
+- `Diseño python.docx`: justificación técnica del diseño.
 
 ## 5. Conceptos de POO demostrados
 - Encapsulamiento mediante atributos privados y propiedades.
